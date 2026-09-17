@@ -1,0 +1,77 @@
+#usda 1.0
+(
+    defaultPrim = "M20_Piper"
+    documentation = "Portable M20 + Piper + colored D435i and white printed base adapter. Adapter fits the existing 88.8 mm arm mounting height. All references stay inside this package; image capture requires a runtime camera."
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "M20_Piper" (
+    prepend references = @./M20_Piper_high_precision.usd@</M20_Piper>
+)
+{
+    over "Looks"
+    {
+        over "Material_005"
+        {
+            over "PreviewSurface"
+            {
+                custom string adapterRenderingFix = "Treat imported plastic as opaque: its 0.61 opacity causes nearby adapter blackening in Isaac Sim 5.1 RTX; geometry and source robot USD are unchanged"
+                float inputs:opacity = 1
+            }
+        }
+    }
+    over Xform "M20"
+    {
+        over Xform "base_link"
+        {
+            def Xform "piper_base_adapter" (
+                prepend references = @./adapter_board/M20Pro_Piper_adapter_v6_tight_outer_frame.usd@</Adapter>
+            )
+            {
+                custom string installationPurpose = "White printed adapter fitted to the existing robot visual geometry; arm mounting frame retained"
+                custom bool physicalFastenersValidated = false
+                double3 xformOp:translate:adapter_install = (-0.005, 0, 0.080)
+                uniform token[] xformOpOrder = ["xformOp:translate:adapter_install"]
+            }
+        }
+    }
+    over Xform "Piper"
+    {
+        over Xform "gripper_base"
+        {
+            def Xform "piper_wrist_d435i_inspection"
+            {
+                custom string installationPurpose = "Reproduce the audited 20 degree CAD-nominal gripper_base-to-D435i transform for orbit rendering"
+                custom bool metricHandEyeCalibrated = false
+                custom double nominalCadPitchDegrees = 20
+                custom bool sourcedBracketVisualPresent = true
+                quatd xformOp:orient = (0.8191520442889918, 0, -0.573576436351046, 0)
+                double3 xformOp:translate = (-0.0717220136144262, 0.0025000000001307414, 0.03664143841951495)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Xform "official_d435i_visual" (
+                    prepend references = @./d435i_colored_visual.usd@</World>
+                )
+                {
+                    custom bool handAuthoredCameraGeometry = false
+                    quatd xformOp:orient:camera_install = (0.5, 0.5, 0.5, 0.5)
+                    double3 xformOp:translate:camera_install = (0.0043, -0.0325, 0)
+                    uniform token[] xformOpOrder = ["xformOp:translate:camera_install", "xformOp:orient:camera_install"]
+                }
+            }
+
+            def Xform "piper_wrist_d435i_centered_mount" (
+                prepend references = @./piper_d435i_centered_mount.usd@</World>
+            )
+            {
+                custom bool handAuthoredBracketGeometry = false
+                custom string sourceStepSha256 = "ca1eea1299f350034cb56577e942974156f7a8779e792ec559c6216abdd5218d"
+                custom double supportToClampReferenceAngleDegrees = 20
+                quatd xformOp:orient:mount_install = (0.0021004811542744144, -0.7071036614096413, 0.7070846343996299, -0.005596409200703932)
+                double3 xformOp:translate:mount_install = (0.13442000956265382, -0.000525624992831083, -0.14126751428724785)
+                uniform token[] xformOpOrder = ["xformOp:translate:mount_install", "xformOp:orient:mount_install"]
+            }
+        }
+    }
+}

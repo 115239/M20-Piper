@@ -1,0 +1,141 @@
+#usda 1.0
+(
+    defaultPrim = "M20_Piper"
+    doc = "M20 Pro + Piper + D435i nominal sensor rig. OpenUSD static parent transforms; live Fabric recording must use shelf_capture_runtime/local_align. M20 lens calibration and lamp photometry are pending."
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "M20_Piper" (
+    prepend references = @./piper_piper_d435i.usda@</M20_Piper>
+)
+{
+    over "M20"
+    {
+        over "base_link"
+        {
+            def Camera "image_camera" (
+                prepend apiSchemas = ["OmniLensDistortionOpenCvPinholeAPI"]
+            )
+            {
+                float2 clippingRange = (0.01, 10)
+                float focalLength = 0.18
+                float fStop = 0
+                float horizontalAperture = 0.36
+                token omni:lensdistortion:model = "opencvPinhole"
+                float omni:lensdistortion:opencvPinhole:cx = 640
+                float omni:lensdistortion:opencvPinhole:cy = 360
+                float omni:lensdistortion:opencvPinhole:fx = 640
+                float omni:lensdistortion:opencvPinhole:fy = 640
+                int2 omni:lensdistortion:opencvPinhole:imageSize = (1280, 720)
+                float omni:lensdistortion:opencvPinhole:k1 = 0
+                float omni:lensdistortion:opencvPinhole:k2 = 0
+                float omni:lensdistortion:opencvPinhole:k3 = 0
+                float omni:lensdistortion:opencvPinhole:k4 = 0
+                float omni:lensdistortion:opencvPinhole:k5 = 0
+                float omni:lensdistortion:opencvPinhole:k6 = 0
+                float omni:lensdistortion:opencvPinhole:p1 = 0
+                float omni:lensdistortion:opencvPinhole:p2 = 0
+                float omni:lensdistortion:opencvPinhole:s1 = 0
+                float omni:lensdistortion:opencvPinhole:s2 = 0
+                float omni:lensdistortion:opencvPinhole:s3 = 0
+                float omni:lensdistortion:opencvPinhole:s4 = 0
+                custom bool sensor:calibrated = 0
+                custom string sensor:intrinsics = '{"model": "M20 Pro wide-angle RGB", "resolution": [1280, 720], "fx": 640.0000000000001, "fy": 640.0000000000001, "cx": 640.0, "cy": 360.0, "distortion_model": "pinhole", "distortion_coefficients": [], "calibrated": false, "calibration_source": "", "intrinsics_basis": "unpublished M20 intrinsics; provisional 90 deg pinhole", "hardware_stream_fps": 30, "hardware_stream_fps_basis": "official camera guide section 7 default", "hardware_transport": "RTSP over network; USB imager", "hardware_codec": "H.265", "hardware_target_bitrate_bps": 1800000, "hardware_max_bitrate_bps": 2000000, "physical_output_rectification": "M20 Pro V1.1.8 adds undistortion/black-border removal; effective K/crop unmeasured", "hardware_shutter": "unknown", "calibration_resolution": [1280, 720], "K": [[640.0000000000001, 0.0, 640.0], [0.0, 640.0000000000001, 360.0], [0.0, 0.0, 1.0]], "undistorted_horizontal_fov_deg": 89.99999999999999, "undistorted_vertical_fov_deg": 58.71550708558254}'
+                custom int2 sensor:resolution = (1280, 720)
+                float verticalAperture = 0.2025
+                quatd xformOp:orient = (-0.5000000000000002, -0.5, 0.5, 0.5)
+                double3 xformOp:translate = (0.37646, 0, 0.03738)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+
+            def Camera "rear_image_camera" (
+                prepend apiSchemas = ["OmniLensDistortionOpenCvPinholeAPI"]
+            )
+            {
+                float2 clippingRange = (0.01, 10)
+                float focalLength = 0.18
+                float fStop = 0
+                float horizontalAperture = 0.36
+                token omni:lensdistortion:model = "opencvPinhole"
+                float omni:lensdistortion:opencvPinhole:cx = 640
+                float omni:lensdistortion:opencvPinhole:cy = 360
+                float omni:lensdistortion:opencvPinhole:fx = 640
+                float omni:lensdistortion:opencvPinhole:fy = 640
+                int2 omni:lensdistortion:opencvPinhole:imageSize = (1280, 720)
+                float omni:lensdistortion:opencvPinhole:k1 = 0
+                float omni:lensdistortion:opencvPinhole:k2 = 0
+                float omni:lensdistortion:opencvPinhole:k3 = 0
+                float omni:lensdistortion:opencvPinhole:k4 = 0
+                float omni:lensdistortion:opencvPinhole:k5 = 0
+                float omni:lensdistortion:opencvPinhole:k6 = 0
+                float omni:lensdistortion:opencvPinhole:p1 = 0
+                float omni:lensdistortion:opencvPinhole:p2 = 0
+                float omni:lensdistortion:opencvPinhole:s1 = 0
+                float omni:lensdistortion:opencvPinhole:s2 = 0
+                float omni:lensdistortion:opencvPinhole:s3 = 0
+                float omni:lensdistortion:opencvPinhole:s4 = 0
+                custom bool sensor:calibrated = 0
+                custom string sensor:intrinsics = '{"model": "M20 Pro wide-angle RGB", "resolution": [1280, 720], "fx": 640.0000000000001, "fy": 640.0000000000001, "cx": 640.0, "cy": 360.0, "distortion_model": "pinhole", "distortion_coefficients": [], "calibrated": false, "calibration_source": "", "intrinsics_basis": "unpublished M20 intrinsics; provisional 90 deg pinhole", "hardware_stream_fps": 30, "hardware_stream_fps_basis": "official camera guide section 7 default", "hardware_transport": "RTSP over network; USB imager", "hardware_codec": "H.265", "hardware_target_bitrate_bps": 1800000, "hardware_max_bitrate_bps": 2000000, "physical_output_rectification": "M20 Pro V1.1.8 adds undistortion/black-border removal; effective K/crop unmeasured", "hardware_shutter": "unknown", "calibration_resolution": [1280, 720], "K": [[640.0000000000001, 0.0, 640.0], [0.0, 640.0000000000001, 360.0], [0.0, 0.0, 1.0]], "undistorted_horizontal_fov_deg": 89.99999999999999, "undistorted_vertical_fov_deg": 58.71550708558254}'
+                custom int2 sensor:resolution = (1280, 720)
+                float verticalAperture = 0.2025
+                quatd xformOp:orient = (0.4999999999999999, 0.5000000000000001, 0.5000000000000001, 0.5000000000000001)
+                double3 xformOp:translate = (-0.37646, 0, 0.03738)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+
+            def RectLight "front_flashlight"
+            {
+                float inputs:height = 0.0058119
+                float inputs:intensity = 1500
+                bool inputs:normalize = 1
+                float inputs:width = 0.0283893
+                quatd xformOp:orient = (-0.5000000000000002, -0.5, 0.5, 0.5)
+                double3 xformOp:translate = (0.37249007415771485, 0, 0.05635173246264458)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+    }
+
+    over "Piper"
+    {
+        over "gripper_base"
+        {
+            def Camera "wrist_image_camera" (
+                prepend apiSchemas = ["OmniLensDistortionOpenCvPinholeAPI"]
+            )
+            {
+                float2 clippingRange = (0.01, 10)
+                float focalLength = 0.26190162
+                float fStop = 0
+                float horizontalAperture = 0.36
+                token omni:lensdistortion:model = "opencvPinhole"
+                float omni:lensdistortion:opencvPinhole:cx = 480
+                float omni:lensdistortion:opencvPinhole:cy = 270
+                float omni:lensdistortion:opencvPinhole:fx = 698.40436
+                float omni:lensdistortion:opencvPinhole:fy = 698.40436
+                int2 omni:lensdistortion:opencvPinhole:imageSize = (960, 540)
+                float omni:lensdistortion:opencvPinhole:k1 = 0
+                float omni:lensdistortion:opencvPinhole:k2 = 0
+                float omni:lensdistortion:opencvPinhole:k3 = 0
+                float omni:lensdistortion:opencvPinhole:k4 = 0
+                float omni:lensdistortion:opencvPinhole:k5 = 0
+                float omni:lensdistortion:opencvPinhole:k6 = 0
+                float omni:lensdistortion:opencvPinhole:p1 = 0
+                float omni:lensdistortion:opencvPinhole:p2 = 0
+                float omni:lensdistortion:opencvPinhole:s1 = 0
+                float omni:lensdistortion:opencvPinhole:s2 = 0
+                float omni:lensdistortion:opencvPinhole:s3 = 0
+                float omni:lensdistortion:opencvPinhole:s4 = 0
+                custom bool sensor:calibrated = 0
+                custom string sensor:intrinsics = '{"model": "RealSense D435i RGB", "resolution": [960, 540], "fx": 698.4043337627736, "fy": 698.4043337627736, "cx": 480.0, "cy": 270.0, "distortion_model": "pinhole", "distortion_coefficients": [], "calibrated": false, "calibration_source": "", "intrinsics_basis": "product nominal 69 deg horizontal; square pixels give 42.27256 deg vertical", "hardware_stream_fps": 30, "hardware_stream_fps_basis": "supported USB3 RGB mode", "hardware_transport": "USB3", "hardware_codec": "RGB SDK output", "hardware_target_bitrate_bps": null, "hardware_max_bitrate_bps": null, "physical_output_rectification": "selected SDK stream requires calibration", "hardware_shutter": "rolling", "calibration_resolution": [960, 540], "K": [[698.4043337627736, 0.0, 480.0], [0.0, 698.4043337627736, 270.0], [0.0, 0.0, 1.0]], "undistorted_horizontal_fov_deg": 69.0, "undistorted_vertical_fov_deg": 42.27255895009058}'
+                custom int2 sensor:resolution = (960, 540)
+                float verticalAperture = 0.2025
+                quatd xformOp:orient = (-0.12278780396897288, -0.6963642403200189, 0.696364240320019, 0.12278780396897286)
+                double3 xformOp:translate = (-0.0717220136144262, 0.0025000000001307414, 0.03664143841951495)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+    }
+}
+

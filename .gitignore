@@ -1,0 +1,10 @@
+# Runtime output and local environments; model and CAD assets stay tracked.
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
+outputs/
+*.log
+.DS_Store

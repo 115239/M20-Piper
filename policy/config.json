@@ -1,0 +1,34 @@
+{
+  "schema": "quadruped-manipulation/m20-policy-v1",
+  "name": "m20_piper_stowed",
+  "sha256": "e3d92f124d1d4a327862bc4b27208fc499a13f1d3ecd33525c5691cf74dd9c7c",
+  "physics_hz": 200,
+  "policy_hz": 50,
+  "observation_shape": [
+    1,
+    57
+  ],
+  "action_shape": [
+    1,
+    16
+  ],
+  "command_limits_vx_vy_wz": [
+    0.35,
+    0.15,
+    0.35
+  ],
+  "piper_hold_targets": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0.025,
+    -0.025
+  ],
+  "simulation_only": true,
+  "complete_policy": true,
+  "residual": false,
+  "piper_learned_action_channels": 0
+}
