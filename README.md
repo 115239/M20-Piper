@@ -6,6 +6,8 @@
 
 ## 演示视频
 
+https://github.com/user-attachments/assets/76c35489-bec3-4276-978c-6752030b22ac
+
 [下载原始 MP4](https://github.com/115239/M20-Piper/raw/refs/heads/main/demo.mp4)
 
 视频为已有的商超场景演示，原文件名 `M20_Piper_D435i_white_adapter_Market_15s_完全体.mp4`；本仓库原样保存为 `demo.mp4`。下面的启动脚本运行平地示例，商超场景未包含在本仓库内。
