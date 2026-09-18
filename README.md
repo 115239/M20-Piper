@@ -4,7 +4,9 @@
 
 将 Deep Robotics M20 Pro 轮足底盘与 AgileX Piper 机械臂组合，提供完整仿真模型、转接板打印文件和配套底盘运控。模型还包含腕部 D435i、三路相机节点及前灯。
 
-[▶ 查看组合演示视频](demo.mp4)
+## 演示视频
+
+[下载原始 MP4](https://github.com/115239/M20-Piper/raw/refs/heads/main/demo.mp4)
 
 视频为已有的商超场景演示，原文件名 `M20_Piper_D435i_white_adapter_Market_15s_完全体.mp4`；本仓库原样保存为 `demo.mp4`。下面的启动脚本运行平地示例，商超场景未包含在本仓库内。
 
